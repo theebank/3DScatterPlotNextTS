@@ -1,37 +1,30 @@
 import { Html, Line } from "@react-three/drei";
 import type { NextPage } from "next";
 import React, { useRef, useState } from "react";
-import styles from '../Graph.module.css'
+import styles from '../../Graph.module.css'
 
 interface pointProps{
-    Coord1: any,//Positions 1-9
-    Coord3: any,//6 inch increments 0-78 & (T) TOP
-    Coord2: string,//A/B/C/D/E
+    Coord1: number | 'T',//6 inch increments 0-78 & (T) TOP
+    Coord2: "A"|"B"|"C"|"D"|"E",//A/B/C/D/E
+    Coord3: 1|2|3|4|5|6|7|8|9,//Positions 1-9
+    getCoords: (min: number, max: number, offset: number) => number[]
 }
-const Point: NextPage<pointProps> = ({Coord1, Coord2, Coord3}) => {
-    var xs: any[] = [];
-    var ys: any[] = [];
-    var zs: any[] = [];
-    for(var i = -4;i<=4;i++){
-        xs.push(45/4*i)
-    }
-    for(var i = -7;i<=7;i++){
-        ys.push(45/7*i)
-    }
-    for(var i = -2;i<=2;i++){
-        zs.push(45/2*i)
-    }
-    var v: any = ((Coord1==='T') && ys[14]) || ys[Coord1]
-    var d: any = zs[Coord2.charCodeAt(0)-65]
-    var h: any = xs[Coord3];
+const Point: NextPage<pointProps> = ({Coord1, Coord2, Coord3, getCoords}) => {
+
+    const xcoords: number[] = getCoords(-4,4,0);
+    const ycoords: number[] = getCoords(-7,7,0);
+    const zcoords: number[] = getCoords(-2,2,0);
+    
+    const v: number = ((Coord1==='T') && ycoords[14]) || ycoords[Coord1];//vertical coordinate
+    const d: number = zcoords[Coord2.charCodeAt(0)-65];//depth coordinate
+    const h: number = xcoords[Coord3];//horizontal coordinate
 
     
-    function Box(props: any) {
+    const Point=(props: any)=> {
         const mesh = useRef(null)
         const [hovered, setHover] = useState(false)
         const [active, setActive] = useState(false)
-    
-        console.log(props.position[0],props.position[1],props.position[2])
+
         return (
           <>
             <mesh
@@ -71,7 +64,7 @@ const Point: NextPage<pointProps> = ({Coord1, Coord2, Coord3}) => {
       }
     return(
         <>
-            <Box position = {[d,v,-h]} />
+            <Point position = {[d,v,-h]} />
         </>
         
     )
