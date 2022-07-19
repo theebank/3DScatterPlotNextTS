@@ -15,9 +15,9 @@ const Point: NextPage<pointProps> = ({Coord1, Coord2, Coord3, getCoords}) => {
     const ycoords: number[] = getCoords(-7,7,0);
     const zcoords: number[] = getCoords(-2,2,0);
     
-    const v: any = ((Coord1==='T') && ycoords[14]) || ycoords[Coord1];//vertical coordinate
-    const d: any = zcoords[Coord2.charCodeAt(0)-65];//depth coordinate
-    const h: any = xcoords[Coord3];//horizontal coordinate
+    const v: number = ((Coord1==='T') && ycoords[14]) || ycoords[Coord1];//vertical coordinate
+    const d: number = zcoords[Coord2.charCodeAt(0)-65];//depth coordinate
+    const h: number = xcoords[Coord3];//horizontal coordinate
 
     
     const Point=(props: any)=> {
