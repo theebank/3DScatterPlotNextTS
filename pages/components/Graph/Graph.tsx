@@ -4,34 +4,25 @@ import styles from './Graph.module.css'
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import Grid from "./Grid/Grid";
-import Point from "./Points/Point/Point";
-import PointContainer from "./Points/PointContainer";
-import GridContainer from "./Grid/GridContainer";
+import Point from "./Points/Point";
 
 interface graphProps{
-    points: (number|string|number)[][]
+    points: any[][]
 }
 
 const Graph: NextPage<graphProps> = ({points}) => {
-    const [Flipx, setFlipx] = useState<1 | -1>(1);
-    const [Flipy, setFlipy] = useState<1 | -1>(1);
-    const [Flipz, setFlipz] = useState<1 | -1>(1);
+    const [Flipx, setFlipx] = useState(1);
+    const [Flipy, setFlipy] = useState(1);
+    const [Flipz, setFlipz] = useState(1);
 
     
 
     const ocRef = useRef(null)
 
-    const getCoords =(min: number,max: number, offset: number): number[]=>{
-        const arr: number[] = []
-        for(let i = min;i<=max;i++){
-            arr.push(45/max*i+offset)
-        }
-        return arr
-    }
-    const ResetCamera=() =>{
+    function ResetCamera(){
         ocRef.current.reset()
     }
-    const CameraFlip=()=>{
+    function CameraFlip(){
         useFrame(({camera}) => {
             if(camera.position.x<=-40){
                 setFlipx(-1)
@@ -58,8 +49,11 @@ const Graph: NextPage<graphProps> = ({points}) => {
                 <OrbitControls ref ={ocRef} />
                 <CameraFlip />
                 <ambientLight />
-                <GridContainer flipx={Flipx} flipy = {Flipy} flipz = {Flipz} getCoords = {getCoords}/>
-                <PointContainer points={points} getCoords={getCoords}/>
+                <Grid axis = 'depth' flipaxis={Flipz} fliplabel = {Flipy}/>
+                <Grid axis = 'vertical' flipaxis={Flipx} fliplabel = {Flipz}/>
+                <Grid axis = 'horizontal' flipaxis={Flipy} fliplabel = {Flipx}/>
+                {points.map((item,i)=> <Point Coord1={item[0]} Coord2 = {item[1]} Coord3 = {item[2]} key = {i}/>)}
+
             </Canvas>
         </div>
     )

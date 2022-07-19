@@ -3,51 +3,56 @@ import {Html} from "@react-three/drei"
 import React, { useRef } from "react";
 
 interface gridProps{
-    axis: 'depth' | 'vertical' | 'horizontal',//depth, vertical, horizontal
-    flipaxis: 1 | -1,
-    fliplabel: 1 | -1,
-    getCoords: (min: number, max: number, offset: number) => number[]
+    axis: String,//depth, vertical, horizontal
+    flipaxis: any,
+    fliplabel: any
 }
-
-const BOX_GEOMETRY_ARGS = [90,90,0]
-const MESH_STANDARD_COLOR = 'rgb(181,208,232)'
-
-const Grid: NextPage<gridProps> = ({axis, flipaxis, fliplabel, getCoords}) => {
+var verticalrows: any[] = [];
+for(var i = -7;i<=7;i++){
+    verticalrows.push(45/7*i+4)
+}
+var horizontalrows: any[] = [];
+for(var i = -4;i<=4;i++){
+    horizontalrows.push(45/4*i)
+}
+const Grid: NextPage<gridProps> = ({axis, flipaxis, fliplabel}) => {
     const mesh = useRef(null)
-
-    const getGridHelperArgs=(divisions: number)=>{
-        return [90,divisions,0xFFFFFF,0xFFFFFF]
-    }
-
-    const verticalrows: number[] = getCoords(-7,7,4);
-    const horizontalrows: number[] = getCoords(-4,4,0);
-    const depthrows: number[] = getCoords(-2,2,0);
-
     return(
         //Depth axis
         (axis==='depth' &&
             <>  
             {((flipaxis==1) &&
                 <gridHelper 
-                args = {getGridHelperArgs(depthrows.length-1)}
+                args = {[90,4,0xFFFFFF,0xFFFFFF]}
                 rotation = {[Math.PI/2,0,0]}
                 position = {[0,0,-45+0.02]}
                 />
                 ) ||
                 <gridHelper 
-                args = {getGridHelperArgs(depthrows.length-1)}
+                args = {[90,4,0xFFFFFF,0xFFFFFF]}
                 rotation = {[Math.PI/2,0,0]}
                 position = {[0,0,45-0.02]}
                 />}
+
                 <mesh ref = {mesh} position = {[0,0,-45*flipaxis]}>
-                    <boxGeometry args={BOX_GEOMETRY_ARGS} />
-                    <meshStandardMaterial color={MESH_STANDARD_COLOR} />
+                    <boxGeometry args={[90,90,0]} />
+                    <meshStandardMaterial color={'rgb(181, 208, 232)'} />
                     <>
-                        {depthrows.map((z,i)=>
-                            <Html position = {[z,50*fliplabel,0]} key={i}>
-                                <h4>{String.fromCharCode(65+i)}</h4>
+                        <Html position = {[-45,50*fliplabel,0]}>
+                            <h4>A</h4>
+                        </Html>
+                        <Html position = {[-22.5,50*fliplabel,0]}>
+                            <h4>B</h4>
+                        </Html>
+                        <Html position = {[0,50*fliplabel,0]}>
+                            <h4>C</h4>
+                        </Html>
+                        <Html position = {[22.5,50*fliplabel,0]}>
+                            <h4>D</h4>
                             </Html>
-                        )}
+                        <Html position = {[45,50*fliplabel,0]}>
+                            <h4>E</h4>
+                        </Html>
                     </>
                 </mesh>
             </>
@@ -57,19 +62,19 @@ const Grid: NextPage<gridProps> = ({axis, flipaxis, fliplabel, getCoords}) => {
             <>
             {((flipaxis===1)&&
                 <gridHelper 
-                args = {getGridHelperArgs(verticalrows.length-1)}
+                args = {[90,14,0xFFFFFF,0xFFFFFF]}
                 rotation = {[0,0,Math.PI/2]}
                 position = {[-45+0.02,0,0]}
                 />
                 ) ||
                 <gridHelper 
-                args = {getGridHelperArgs(verticalrows.length-1)}
+                args = {[90,14,0xFFFFFF,0xFFFFFF]}
                 rotation = {[0,0,Math.PI/2]}
                 position = {[45-0.02,0,0]}
                 />}
                 <mesh ref = {mesh} rotation = {[0,Math.PI/2,0]} position = {[-45*flipaxis,0,0]}>
-                    <boxGeometry args={BOX_GEOMETRY_ARGS} />
-                    <meshStandardMaterial color={MESH_STANDARD_COLOR} />
+                    <boxGeometry args={[90,90,0]} />
+                    <meshStandardMaterial color={'rgb(181, 208, 232)'} />
                     <>
                         {verticalrows.map((y,i) => 
                             <Html position = {[-45*fliplabel,y,0]} key = {i}>
@@ -87,20 +92,20 @@ const Grid: NextPage<gridProps> = ({axis, flipaxis, fliplabel, getCoords}) => {
             <>
                 {((flipaxis===1) &&
                 <gridHelper 
-                args = {getGridHelperArgs(horizontalrows.length-1)}
+                args = {[90,8,0xFFFFFF,0xFFFFFF]}
                 rotation = {[0,Math.PI/2,0]}
                 position = {[0,-45+0.02,0]}
                 />
                 ) ||
                 <gridHelper 
-                args = {getGridHelperArgs(horizontalrows.length-1)}
+                args = {[90,8,0xFFFFFF,0xFFFFFF]}
                 rotation = {[0,Math.PI/2,0]}
                 position = {[0,45-0.02,0]}
                 />}
 
                 <mesh ref = {mesh} rotation = {[Math.PI/2,0,-Math.PI/2]} position = {[0,-45 * flipaxis,0]}>
-                    <boxGeometry args={BOX_GEOMETRY_ARGS} />
-                    <meshStandardMaterial color={MESH_STANDARD_COLOR} />
+                    <boxGeometry args={[90,90,0]} />
+                    <meshStandardMaterial color={'rgb(181, 208, 232)'} />
                     <>
                     {horizontalrows.map((x,i)=>
                     <Html position = {[x,45*fliplabel,0]} key = {i}>
