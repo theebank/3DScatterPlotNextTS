@@ -1,9 +1,9 @@
 import React from "react";
 import type { NextPage } from "next";
 import Point from "./Point/Point";
-import { dosReadCoord1, dosReadCoord2, dosReadCoord3 } from "../Graph";
+import { dosReadCoord1, dosReadCoord2, dosReadCoord3 } from "../GraphT";
 interface pointContainerProps {
-  points: (dosReadCoord1 | dosReadCoord2 | dosReadCoord3)[];
+  points: [dosReadCoord1, dosReadCoord2, dosReadCoord3][];
   getCoords: (min: number, max: number, offset: number) => number[];
 }
 
@@ -11,12 +11,7 @@ const PointContainer: NextPage<pointContainerProps> = ({
   points,
   getCoords,
 }) => {
-  console.log(
-    new Array(256)
-      .fill(0)
-      .map((_, i) => i)
-      .join(" | ")
-  );
+  console.log(points);
   return (
     <>
       {points.map((item, i) => (

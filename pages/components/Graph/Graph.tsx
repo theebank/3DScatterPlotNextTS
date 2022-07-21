@@ -5,9 +5,9 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import PointContainer from "./Points/PointContainer";
 import GridContainer from "./Grid/GridContainer";
-import { dosReadCoord1, dosReadCoord2, dosReadCoord3 } from "./Graph";
+import { dosReadCoord1, dosReadCoord2, dosReadCoord3 } from "./GraphT";
 interface graphProps {
-  points: (dosReadCoord1 | dosReadCoord2 | dosReadCoord3)[];
+  points: [dosReadCoord1, dosReadCoord2, dosReadCoord3][];
 }
 
 const Graph: NextPage<graphProps> = ({ points }) => {
@@ -17,6 +17,7 @@ const Graph: NextPage<graphProps> = ({ points }) => {
 
   const ocRef = useRef(null);
 
+  //Generates a set of coordinates for each axis
   const getCoords = (min: number, max: number, offset: number): number[] => {
     const arr: number[] = [];
     for (let i = min; i <= max; i++) {
@@ -27,6 +28,7 @@ const Graph: NextPage<graphProps> = ({ points }) => {
   const ResetCamera = () => {
     ocRef.current.reset();
   };
+  //Modifies axis location based on camera position
   const CameraFlip = () => {
     useFrame(({ camera }) => {
       if (camera.position.x <= -40) {

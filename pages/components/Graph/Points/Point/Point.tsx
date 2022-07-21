@@ -2,7 +2,7 @@ import { Html, Line } from "@react-three/drei";
 import type { NextPage } from "next";
 import React, { useRef, useState } from "react";
 import styles from "../../Graph.module.css";
-import { dosReadCoord1, dosReadCoord2, dosReadCoord3 } from "../../Graph";
+import { dosReadCoord1, dosReadCoord2, dosReadCoord3 } from "../../GraphT";
 
 interface pointProps {
   Coord1: dosReadCoord1; //6 inch increments 0-78 & (T) TOP
@@ -15,7 +15,7 @@ const Point: NextPage<pointProps> = ({ Coord1, Coord2, Coord3, getCoords }) => {
   const ycoords: number[] = getCoords(-7, 7, 0);
   const zcoords: number[] = getCoords(-2, 2, 0);
 
-  const v: number = (Coord1 === "T" && ycoords[14]) || ycoords[Coord1]; //vertical coordinate
+  const v: number = ycoords[Coord1]; //vertical coordinate
   const d: number = zcoords[Coord2.charCodeAt(0) - 65]; //depth coordinate
   const h: number = xcoords[Coord3]; //horizontal coordinate
 
@@ -44,6 +44,9 @@ const Point: NextPage<pointProps> = ({ Coord1, Coord2, Coord3, getCoords }) => {
                   {Coord3 + 1}
                 </div>
               </Html>
+              {/*Ignore the warnings on each line component, 
+              solution is to add 120+ properties, but is functional
+              without each property */}
               <Line
                 points={[
                   [0, 0, 0],
