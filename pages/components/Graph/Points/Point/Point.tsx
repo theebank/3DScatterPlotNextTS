@@ -5,18 +5,25 @@ import styles from "../../Graph.module.css";
 import { dosReadCoord1, dosReadCoord2, dosReadCoord3 } from "../../GraphT";
 
 interface pointProps {
-  Coord1: dosReadCoord1; //6 inch increments 0-78 & (T) TOP
-  Coord2: dosReadCoord2; //A/B/C/D/E
+  Coord1: number; //6 inch increments 0-78 & (T) TOP
+  Coord2: number; //A/B/C/D/E
   Coord3: dosReadCoord3; //Positions 1-9
+  xcoords: number[];
+  ycoords: number[];
+  zcoords: number[];
   getCoords: (min: number, max: number, offset: number) => number[];
 }
-const Point: NextPage<pointProps> = ({ Coord1, Coord2, Coord3, getCoords }) => {
-  const xcoords: number[] = getCoords(-4, 4, 0);
-  const ycoords: number[] = getCoords(-7, 7, 0);
-  const zcoords: number[] = getCoords(-2, 2, 0);
-
+const Point: NextPage<pointProps> = ({
+  Coord1,
+  Coord2,
+  Coord3,
+  xcoords,
+  ycoords,
+  zcoords,
+  getCoords,
+}) => {
   const v: number = ycoords[Coord1]; //vertical coordinate
-  const d: number = zcoords[Coord2.charCodeAt(0) - 65]; //depth coordinate
+  const d: number = zcoords[Coord2]; //depth coordinate
   const h: number = xcoords[Coord3]; //horizontal coordinate
 
   const Point = (props: any) => {

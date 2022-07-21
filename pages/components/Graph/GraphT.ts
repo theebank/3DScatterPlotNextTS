@@ -21,6 +21,6 @@ export type Range<FROM extends number, TO extends number> = Exclude<
   Enumerate<FROM>
 >;
 
-export type dosReadCoord1 = number;
+export type dosReadCoord1 = number | "T";
 export type dosReadCoord2 = "A" | "B" | "C" | "D" | "E";
 export type dosReadCoord3 = Range<0, 9>;
