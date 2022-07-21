@@ -1,5 +1,21 @@
-# Requires @react-three/fiber & @react-three/drei
+# How to setup:
+    - Navigate to desired location
+    - "git clone git@gitlab.syntronic-can.com:design-house/nordion-3ddosimetryreadsgraph.git"
+    - enter folder using "cd nordion-3ddosimetryreadsgraph”
+
+    - *IF NOT MERGED YET*
+    - Git checkout Setup/NextTS-with-react-three-fiber
+
+    - npm install
+
+    - To run: 
+    - npx next dev  
+
+## Dependencies:@react-three/fiber@react-three/drei
+
+
 # How to Implement:
+    - run "npm install --save @react-three/fiber @react-three/drei”   
     - Import component from 'pages/components/Graph/Graph.tsx' and then place it wherever desired 
     - One Prop: points 2d array of type any[][]. 
     - Requires data be passed in order and format as found in 'pages/components/Graph/CoordinateFormat.png' but in array format. Ex: 2A9 = [2,'A',9] if the level is the top(T) pass as 'T'
