@@ -13,6 +13,8 @@ interface graphProps{
 }
 
 const Graph: NextPage<graphProps> = ({points}) => {
+    
+    
     const [Flipx, setFlipx] = useState<1 | -1>(1);
     const [Flipy, setFlipy] = useState<1 | -1>(1);
     const [Flipz, setFlipz] = useState<1 | -1>(1);

@@ -6,7 +6,7 @@ interface gridContainerProps{
     flipx: 1|-1,
     flipy: 1|-1,
     flipz: 1|-1,
-    getCoords: (min: number, max: number, offset: number) => number[]
+    getCoords: (min: number, max: number, offset: number) => number[],
 }
 
 const GridContainer: NextPage<gridContainerProps> = ({flipx,flipy,flipz,getCoords}) => {
