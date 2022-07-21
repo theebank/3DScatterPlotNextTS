@@ -33,21 +33,20 @@ const PointContainer: NextPage<pointContainerProps> = ({
     item: [dosReadCoord1, dosReadCoord2, dosReadCoord3],
     i: number
   ) => {
-    const Coord1: number = fillycoordmap(item[0])!;
+    const v: number = fillycoordmap(item[0])!;
     return (
       <Point
-        Coord1={Coord1}
-        Coord2={item[1].charCodeAt(0) - 65}
+        Coord1={item[0]}
+        v={v}
+        Coord2={item[1]}
         Coord3={item[2]}
         xcoords={xcoords}
-        ycoords={ycoords}
         zcoords={zcoords}
         key={i}
         getCoords={getCoords}
       />
     );
   };
-  console.log(ycoordmap);
   return <>{points.map((item, i) => pointmap(item, i))}</>;
 };
 
