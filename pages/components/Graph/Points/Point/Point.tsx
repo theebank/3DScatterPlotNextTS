@@ -2,11 +2,12 @@ import { Html, Line } from "@react-three/drei";
 import type { NextPage } from "next";
 import React, { useRef, useState } from "react";
 import styles from "../../Graph.module.css";
+import { dosReadCoord1, dosReadCoord2, dosReadCoord3 } from "../../Graph";
 
 interface pointProps {
-  Coord1: number | "T"; //6 inch increments 0-78 & (T) TOP
-  Coord2: "A" | "B" | "C" | "D" | "E"; //A/B/C/D/E
-  Coord3: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9; //Positions 1-9
+  Coord1: dosReadCoord1; //6 inch increments 0-78 & (T) TOP
+  Coord2: dosReadCoord2; //A/B/C/D/E
+  Coord3: dosReadCoord3; //Positions 1-9
   getCoords: (min: number, max: number, offset: number) => number[];
 }
 const Point: NextPage<pointProps> = ({ Coord1, Coord2, Coord3, getCoords }) => {
