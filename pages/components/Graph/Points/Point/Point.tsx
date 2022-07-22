@@ -6,7 +6,7 @@ import { TCoord1, TCoord2, TCoord3, TPoint } from "../../Types/Graph";
 
 const Point: NextPage<TPoint> = ({
   Coord1,
-  v,
+  v, //vertical coordinate
   Coord2,
   Coord3,
   xcoords,
@@ -41,7 +41,7 @@ const Point: NextPage<TPoint> = ({
                 </div>
               </Html>
               {/*Ignore the warnings on each line component, 
-              solution is to add 120+ properties, but is functional
+              solution is to add 120+ properties with value set to undefined, but is functional
               without each property */}
               <Line
                 points={[
