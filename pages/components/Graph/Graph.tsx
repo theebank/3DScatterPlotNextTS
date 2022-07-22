@@ -5,12 +5,9 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import PointContainer from "./Points/PointContainer";
 import GridContainer from "./Grid/GridContainer";
-import { dosReadCoord1, dosReadCoord2, dosReadCoord3 } from "./GraphT";
-interface graphProps {
-  points: [dosReadCoord1, dosReadCoord2, dosReadCoord3][];
-}
+import { TCoord1, TCoord2, TCoord3, TGraph } from "./Types/Graph";
 
-const Graph: NextPage<graphProps> = ({ points }) => {
+const Graph: NextPage<TGraph> = ({ points }) => {
   const [Flipx, setFlipx] = useState<1 | -1>(1);
   const [Flipy, setFlipy] = useState<1 | -1>(1);
   const [Flipz, setFlipz] = useState<1 | -1>(1);

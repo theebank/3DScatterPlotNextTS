@@ -2,18 +2,9 @@ import { Html, Line } from "@react-three/drei";
 import type { NextPage } from "next";
 import React, { useRef, useState } from "react";
 import styles from "../../Graph.module.css";
-import { dosReadCoord1, dosReadCoord2, dosReadCoord3 } from "../../GraphT";
+import { TCoord1, TCoord2, TCoord3, TPoint } from "../../Types/Graph";
 
-interface pointProps {
-  Coord1: dosReadCoord1; //6 inch increments 0-78 & (T) TOP
-  v: number;
-  Coord2: dosReadCoord2; //A/B/C/D/E
-  Coord3: dosReadCoord3; //Positions 1-9
-  xcoords: number[];
-  zcoords: number[];
-  getCoords: (min: number, max: number, offset: number) => number[];
-}
-const Point: NextPage<pointProps> = ({
+const Point: NextPage<TPoint> = ({
   Coord1,
   v,
   Coord2,

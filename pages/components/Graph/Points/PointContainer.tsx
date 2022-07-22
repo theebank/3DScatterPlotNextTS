@@ -1,23 +1,16 @@
 import React from "react";
 import type { NextPage } from "next";
 import Point from "./Point/Point";
-import { dosReadCoord1, dosReadCoord2, dosReadCoord3 } from "../GraphT";
-interface pointContainerProps {
-  points: [dosReadCoord1, dosReadCoord2, dosReadCoord3][];
-  getCoords: (min: number, max: number, offset: number) => number[];
-}
+import { TCoord1, TCoord2, TCoord3, TPointContainer } from "../Types/Graph";
 
-const PointContainer: NextPage<pointContainerProps> = ({
-  points,
-  getCoords,
-}) => {
+const PointContainer: NextPage<TPointContainer> = ({ points, getCoords }) => {
   const xcoords: number[] = getCoords(-4, 4, 0);
   const ycoords: number[] = getCoords(-7, 7, 0);
   const zcoords: number[] = getCoords(-2, 2, 0);
 
-  const ycoordmap = new Map<dosReadCoord1, number>();
+  const ycoordmap = new Map<TCoord1, number>();
 
-  const fillycoordmap = (Coord1: dosReadCoord1) => {
+  const fillycoordmap = (Coord1: TCoord1) => {
     if (ycoordmap.has(Coord1)) {
       return ycoordmap.get(Coord1);
     } else {
@@ -29,10 +22,7 @@ const PointContainer: NextPage<pointContainerProps> = ({
       return ycoordmap.get(Coord1);
     }
   };
-  const pointmap = (
-    item: [dosReadCoord1, dosReadCoord2, dosReadCoord3],
-    i: number
-  ) => {
+  const pointmap = (item: [TCoord1, TCoord2, TCoord3], i: number) => {
     const v: number = fillycoordmap(item[0])!;
     return (
       <Point

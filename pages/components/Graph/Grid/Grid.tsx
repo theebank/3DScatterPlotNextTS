@@ -1,23 +1,12 @@
 import type { NextPage } from "next";
 import { Html } from "@react-three/drei";
 import React, { useRef } from "react";
-
-interface gridProps {
-  axis: "depth" | "vertical" | "horizontal"; //depth, vertical, horizontal
-  flipaxis: 1 | -1;
-  fliplabel: 1 | -1;
-  getCoords: (min: number, max: number, offset: number) => number[];
-}
+import { TGrid } from "../Types/Graph";
 
 const BOX_GEOMETRY_ARGS = [90, 90, 0];
 const MESH_STANDARD_COLOR = "rgb(181,208,232)";
 
-const Grid: NextPage<gridProps> = ({
-  axis,
-  flipaxis,
-  fliplabel,
-  getCoords,
-}) => {
+const Grid: NextPage<TGrid> = ({ axis, flipaxis, fliplabel, getCoords }) => {
   const mesh = useRef(null);
 
   const getGridHelperArgs = (divisions: number) => {
