@@ -1,0 +1,26 @@
+/*Modify .Scene to change the size of the model*/
+.scene{
+    height: 100vh;
+    width: 100vw;
+  }
+.canvas{
+    height: 100vh;
+    width: 100vw;
+  }
+.Pointlabels {
+    padding-top: 10px;
+    transform: translate3d(50%, 0, 0);
+    text-align: left;
+    background: #202035;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;width: 100%;
+    height: 100%;
+
+}
+.resetcambutton{
+  border-radius: 20px;
+  background-color: #004680;
+
+  color: #fff;
+}
